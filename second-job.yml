@@ -1,7 +1,6 @@
 - name: second job
   hosts: demo_sut
   vars:
-    vlan_key: "{{ vlan_result }}"
     vlan_values:
       200:
         ip: 192.168.200.10
@@ -22,7 +21,7 @@
     - name: Create subnet
       debug: Create subnet with the following values
         msg: "ip 192.168.200.10 network 192.168.200.0 gateway 192.168.200.254"
-      when: '"200" in vlan_result'
+      when: '"200" in results.msg'
 
       #    - name: "Output test results"
       #debug:
