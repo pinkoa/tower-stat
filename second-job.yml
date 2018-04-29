@@ -1,9 +1,52 @@
 - name: second job
   hosts: demo_sut
+    vars:
+    vlan_key: "{{ vlan_result }}"
+    vlan_values:
+      200:
+        ip: 192.168.200.10
+        network: 192.168.200.0
+        gateway: 192.168.200.254
+
+      100:
+        ip: 192.168.100.10
+        network: 192.168.100.0
+        gateway: 192.168.100.254
+
   tasks:
+    - name: Print vlan {{ vlan_key }} values
+      debug:
+        msg:
+          - "{{vlan_values[vlan_key]['ip']}}"
+          - "{{vlan_values[vlan_key]['network']}}"
+          - "{{vlan_values[vlan_key]['gateway']}}"
+
+    - name: Import slave config files
+      template:
+        src: files/ifcfg-slave-base.j2
+        dest: /etc/sysconfig/network-scripts/ifcfg-{{ ansible_interfaces[item] }}
+      with_items:
+        - 1
+        - 2
+
+    - name: Create Bond0 file
+      template:
+        src: files/ifcfg-bond0-base.j2
+        dest: /etc/sysconfig/network-scripts/ifcfg-bond0
+
+    - name: Create VLAN Bond0 file
+      template:
+        src: files/ifcfg-bond0-vlan.j2
+        dest: /etc/sysconfig/network-scripts/ifcfg-bond0.{{ vlan_key }}
+
+#    - name: Restart Network Service
+#      service:
+#        name: network
+#        state: restarted
+
     - name: "Print obtained value from tower"
       debug:
-        msg: "{{ vlan_key }}"
+        msg: "{{ vlan_result }}"
       register: results
 
 
