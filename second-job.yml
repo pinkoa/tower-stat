@@ -13,6 +13,15 @@
         gateway: 192.168.100.254
 
   tasks:
+    - name: "Print obtained value from tower"
+      debug:
+        msg: "{{ vlan_result }}"
+      register: results
+
+    - name: "Output test results"
+      debug:
+        msg: "{{ results.msg }}"
+      
     - name: Print vlan {{ vlan_result }} values
       debug:
         msg:
@@ -43,10 +52,6 @@
 #        name: network
 #        state: restarted
 
-    - name: "Print obtained value from tower"
-      debug:
-        msg: "{{ vlan_result }}"
-      register: results
 
 
     - name: "Output test results"
