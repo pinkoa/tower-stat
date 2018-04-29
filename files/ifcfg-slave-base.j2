@@ -1,0 +1,9 @@
+DEVICE={{ ansible_interfaces[item] }}
+#NAME={{ ansible_interfaces[item] }}
+TYPE=Ethernet
+BOOTPROTO=none
+ONBOOT=yes
+MASTER=bond0
+SLAVE=yes
+NM_CONTROLLED=no
+#MTU=9216
