@@ -1,7 +1,7 @@
 - name: second job
   hosts: demo_sut
     vars:
-    vlan_key: "{{ vlan_result }}"
+#    vlan_result: "{{ vlan_result }}"
     vlan_values:
       200:
         ip: 192.168.200.10
@@ -14,12 +14,12 @@
         gateway: 192.168.100.254
 
   tasks:
-    - name: Print vlan {{ vlan_key }} values
+    - name: Print vlan {{ vlan_result }} values
       debug:
         msg:
-          - "{{vlan_values[vlan_key]['ip']}}"
-          - "{{vlan_values[vlan_key]['network']}}"
-          - "{{vlan_values[vlan_key]['gateway']}}"
+          - "{{vlan_values[vlan_result]['ip']}}"
+          - "{{vlan_values[vlan_result]['network']}}"
+          - "{{vlan_values[vlan_result]['gateway']}}"
 
     - name: Import slave config files
       template:
@@ -37,7 +37,7 @@
     - name: Create VLAN Bond0 file
       template:
         src: files/ifcfg-bond0-vlan.j2
-        dest: /etc/sysconfig/network-scripts/ifcfg-bond0.{{ vlan_key }}
+        dest: /etc/sysconfig/network-scripts/ifcfg-bond0.{{ vlan_result }}
 
 #    - name: Restart Network Service
 #      service:

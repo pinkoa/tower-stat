@@ -1,8 +1,8 @@
-DEVICE=bond0.{{ vlan_key }}
+DEVICE=bond0.{{ vlan_result }}
 BOOTPROTO=none
 ONBOOT=yes
-IPADDR={{vlan_values[vlan_key]['ip']}}
+IPADDR={{vlan_values[vlan_result]['ip']}}
 PREFIX=24
-NETWORK={{vlan_values[vlan_key]['network']}}
+NETWORK={{vlan_values[vlan_result]['network']}}
 VLAN=yes
-GATEWAY={{vlan_values[vlan_key]['gateway']}}
+GATEWAY={{vlan_values[vlan_result]['gateway']}}
