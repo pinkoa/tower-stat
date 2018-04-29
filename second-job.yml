@@ -27,7 +27,7 @@
       debug:
         msg: "{{ vlan_key }}"
 
-    - name: Print vlan {{ vlan_result }} values
+    - name: Print vlan "{{ vlan_result }}" values
       debug:
         msg:  "{{vlan_values[vlan_key]['ip']}}"
 
