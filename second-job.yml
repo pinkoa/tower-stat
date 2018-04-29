@@ -23,6 +23,10 @@
       debug:
         msg: "{{ results.msg }}"
       
+    - name: "Output test vlan_key"
+      debug:
+        msg: "{{ vlan_key }}"
+
     - name: Print vlan {{ vlan_result }} values
       debug:
         msg:
