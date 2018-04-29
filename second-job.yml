@@ -29,10 +29,7 @@
 
     - name: Print vlan {{ vlan_result }} values
       debug:
-        msg:
-          - "{{vlan_values[vlan_key]['ip']}}"
-          - "{{vlan_values[vlan_key]['network']}}"
-          - "{{vlan_values[vlan_key]['gateway']}}"
+        msg:  "{{vlan_values[vlan_key]['ip']}}"
 
     - name: Import slave config files
       template:
