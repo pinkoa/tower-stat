@@ -1,0 +1,11 @@
+- hosts: localhost
+tasks:
+  - name: "Artifact integration test results to the web"
+    debug:
+      msg: "Hello From Tower"
+    register: result
+
+  - name: "Artifact URL of test results to Tower Workflows"
+    set_stats:
+      data:
+        vlan_key:  "{{ (result.stdout }}"

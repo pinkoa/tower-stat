@@ -1,0 +1,11 @@
+- hosts: demo_sut
+tasks:
+  - name: "Print obtained value from tower"
+    debug:
+      msg: "{{ vlan_key }}"
+    register: results
+
+
+  - name: "Output test results"
+    debug:
+      msg: "{{ results.stdout }}"
