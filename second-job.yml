@@ -1,7 +1,6 @@
 - name: second job
   hosts: demo_sut
     vars:
-#    vlan_result: "{{ vlan_result }}"
       vlan_values:
         200:
           ip: 192.168.200.10
