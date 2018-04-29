@@ -13,11 +13,13 @@
       template:
         src: files/ifcfg-bond0-base.j2
         dest: /etc/sysconfig/network-scripts/ifcfg-bond0
+      become: True
 
     - name: Create VLAN Bond0 file
       template:
         src: files/ifcfg-bond0-vlan.j2
         dest: /etc/sysconfig/network-scripts/ifcfg-bond0.{{ vlan_result.stdout }}
+      become: True
 
 #    - name: Restart Network Service
 #      service:
