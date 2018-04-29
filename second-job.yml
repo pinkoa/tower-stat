@@ -1,16 +1,16 @@
 - name: second job
   hosts: demo_sut
-    vars:
-      vlan_values:
-        200:
-          ip: 192.168.200.10
-          network: 192.168.200.0
-          gateway: 192.168.200.254
+  vars:
+    vlan_values:
+      200:
+        ip: 192.168.200.10
+        network: 192.168.200.0
+        gateway: 192.168.200.254
 
-        100:
-          ip: 192.168.100.10
-          network: 192.168.100.0
-          gateway: 192.168.100.254
+      100:
+        ip: 192.168.100.10
+        network: 192.168.100.0
+        gateway: 192.168.100.254
 
   tasks:
     - name: Print vlan {{ vlan_result }} values
