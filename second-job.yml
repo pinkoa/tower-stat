@@ -19,17 +19,22 @@
         msg: "{{ vlan_result }}"
       register: results
 
-    - name: "Output test results"
-      debug:
-        msg: "{{ results.msg }}"
-      
-    - name: "Output test vlan_key"
-      debug:
-        msg: "{{ vlan_key }}"
+    - name: Create subnet
+      debug: Create subnet with the following values
+        msg: "ip: 192.168.200.10 network: 192.168.200.0 gateway: 192.168.200.254"
+      when: '200' == "{{ vlan_result }}"
 
-    - name: Print vlan "{{ vlan_result }}" values
-      debug:
-        msg:  "{{vlan_values[vlan_result]['ip']}}"
+      #    - name: "Output test results"
+      #debug:
+      #  msg: "{{ results.msg }}"
+      
+      #- name: "Output test vlan_key"
+      #debug:
+      #  msg: "{{ vlan_key }}"
+
+#    - name: Print vlan "{{ vlan_result }}" values
+#      debug:
+#        msg:  "{{vlan_values[vlan_result]['ip']}}"
 
     - name: Import slave config files
       template:
