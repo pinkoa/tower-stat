@@ -21,8 +21,8 @@
 
     - name: Create subnet
       debug: Create subnet with the following values
-        msg: "ip: 192.168.200.10 network: 192.168.200.0 gateway: 192.168.200.254"
-      when: '200' == "{{ vlan_result }}"
+        msg: "ip 192.168.200.10 network 192.168.200.0 gateway 192.168.200.254"
+      when: "200" == vlan_result
 
       #    - name: "Output test results"
       #debug:
