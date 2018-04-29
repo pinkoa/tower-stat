@@ -9,4 +9,4 @@
 
     - name: "Output test results"
       debug:
-        msg: "{{ results.stdout }}"
+        msg: "{{ results.msg }}"
