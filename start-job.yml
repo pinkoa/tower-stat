@@ -1,12 +1,56 @@
 - name: first job
   hosts: localhost
+  vars:
+    vlan_values:
+      200:
+        ip: 192.168.200.10
+        network: 192.168.200.0
+        gateway: 192.168.200.254
+
+      100:
+        ip: 192.168.100.10
+        network: 192.168.100.0
+        gateway: 192.168.100.254
+  
   tasks:
-    - name: "Artifact integration test results to the web"
+    - name: "Get Vlan"
+      shell: "echo 200"
+      register: result_vlan
+
+    - set_fact: vlan_key={{ result_vlan.stdout }}
+
+      #    - name: "debug vlan properties"
+      #debug:
+      #  msg: "{{vlan_values['vlan_key']['ip']}}" 
+
+    - name: "Create Subnet for vlan {{ result_vlan.stdout }}"
+      debug: 
+        msg: "192.168.5.200 192.168.200.0 192.168.200.254"
+      when: '"200" in result_vlan.stdout'
+
+
+    - name: "Create Subnet for vlan {{ result_vlan.stdout }}"
       debug:
-        msg: "200"
-      register: result
+        msg: "192.168.5.100 192.168.100.0 192.168.100.254"
+      when: '"100" in result_vlan.stdout'
+
+    - name: "Create port and obtain IP"
+      shell: "echo 192.168.200.50"
+      register: result_ip
+
+    - name: "Get Gateway"
+      shell: "echo 192.168.200.33"
+      register: result_gw
+
+    - name: "Get NetMask"
+      shell: "echo 24"
+      register: result_netmask
+
 
     - name: "Artifact URL of test results to Tower Workflows"
       set_stats:
         data:
-          vlan_result:  "{{ result.msg }}"
+          vlan_result: "{{ result_vlan.stdout }}"
+          ip_result: "{{ result_ip.stdout }}"
+          gw_result: "{{ result_gw.stdout }}"
+          netmask_result: "{{ result_netmask.stdout }}"

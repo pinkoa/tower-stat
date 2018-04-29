@@ -1,40 +1,6 @@
 - name: second job
   hosts: demo_sut
-  vars:
-    vlan_values:
-      200:
-        ip: 192.168.200.10
-        network: 192.168.200.0
-        gateway: 192.168.200.254
-
-      100:
-        ip: 192.168.100.10
-        network: 192.168.100.0
-        gateway: 192.168.100.254
-
   tasks:
-    - name: "Print obtained value from tower"
-      debug:
-        msg: "{{ vlan_result }}"
-      register: results
-
-    - name: Create subnet
-      debug: Create subnet with the following values
-        msg: "it works 200"
-      when: '"200" in results.msg'
-
-      #    - name: "Output test results"
-      #debug:
-      #  msg: "{{ results.msg }}"
-      
-      #- name: "Output test vlan_key"
-      #debug:
-      #  msg: "{{ vlan_key }}"
-
-#    - name: Print vlan "{{ vlan_result }}" values
-#      debug:
-#        msg:  "{{vlan_values[vlan_result]['ip']}}"
-
     - name: Import slave config files
       template:
         src: files/ifcfg-slave-base.j2
@@ -51,15 +17,9 @@
     - name: Create VLAN Bond0 file
       template:
         src: files/ifcfg-bond0-vlan.j2
-        dest: /etc/sysconfig/network-scripts/ifcfg-bond0.{{ vlan_result }}
+        dest: /etc/sysconfig/network-scripts/ifcfg-bond0.{{ vlan_result.stdout }}
 
 #    - name: Restart Network Service
 #      service:
 #        name: network
 #        state: restarted
-
-
-
-    - name: "Output test results"
-      debug:
-        msg: "{{ results.msg }}"
