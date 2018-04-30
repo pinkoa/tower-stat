@@ -60,7 +60,7 @@
         name: baremetal
         groups: openstack
         ansible_host: "192.168.5.151"
-        ansible_user: "{{ cloud_user }}"
+        ansible_user: cloud_user
         ansible_become: yes
 
 - name: Add host
