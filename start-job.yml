@@ -65,7 +65,7 @@
 
 - name: Add host
   hosts: openstack
-  become: true
+  #  become: true
   vars:
     nics: []
     nic_count: 0
