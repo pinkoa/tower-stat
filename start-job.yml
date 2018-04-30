@@ -56,12 +56,12 @@
           netmask_result: "{{ result_netmask.stdout }}"
 
     - name: add baremetal to ansible inventory - RedHat
-       add_host:
-         name: baremetal
-         groups: openstack
-         ansible_host: "192.168.5.151"
-         ansible_user: "{{ cloud_user }}"
-         ansible_become: yes
+      add_host:
+        name: baremetal
+        groups: openstack
+        ansible_host: "192.168.5.151"
+        ansible_user: "{{ cloud_user }}"
+        ansible_become: yes
 
 - name: Add host
   hosts: openstack
