@@ -61,11 +61,10 @@
         groups: openstack
         ansible_host: "192.168.5.151"
         ansible_user: cloud_user
-        ansible_become: yes
 
 - name: Add host
   hosts: openstack
-  #  become: true
+  become: true
   vars:
     nics: []
     nic_count: 0
