@@ -54,3 +54,24 @@
           ip_result: "{{ result_ip.stdout }}"
           gw_result: "{{ result_gw.stdout }}"
           netmask_result: "{{ result_netmask.stdout }}"
+
+    - name: add baremetal to ansible inventory - RedHat
+       add_host:
+         name: baremetal
+         groups: openstack
+         ansible_host: "192.168.5.151"
+         ansible_user: "{{ cloud_user }}"
+         ansible_become: yes
+
+- hosts: openstack
+  become: true
+  vars:
+    nics: []
+    nic_count: 0
+    baremetal_nic:
+    vlan_interface:
+  tasks:
+    - name:  touch file
+      shell: "touch /root/file-test.txt"
+
+
