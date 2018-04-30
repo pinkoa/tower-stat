@@ -63,7 +63,8 @@
          ansible_user: "{{ cloud_user }}"
          ansible_become: yes
 
-- hosts: openstack
+- name: Add host
+  hosts: openstack
   become: true
   vars:
     nics: []
